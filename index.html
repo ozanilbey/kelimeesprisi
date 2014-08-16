@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Kelime Esprisi">
+    <meta name="author" content="Ozan İlbey Yılmaz">
+    <meta property="og:title" content="Kelime Esprisi" />
+    <meta property="og:url" content="http://kelimeesprisi.com" />
+    <meta property="og:image" content="http://kelimeesprisi.com/images/kelimeesprisi-icon.png" />
+    <meta property="og:description" content="Kelime Esprisi" />
+    
+    <title>Kelime Esprisi</title>
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    
+    <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssreset/cssreset-min.css">
+    <link type="text/less" rel="stylesheet" href="styles/style.less">
+    
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body class="preview">
+    <div id="brandContainer">
+        <div id="identity">
+            <img src="images/kelimeesprisi-identity.png" alt="" />
+        </div>
+    </div>
+    <div id="messageContainer">
+        <div class="message">
+            <div class="warning">
+                <b>Aman dikkat!</b>
+                <br>
+                Görüntülemek üzere olduğunuz web sayfası sağlığınızı ve sosyal ilişkilerinizi tehlikeye atabilecek kadar iğrenç espriler içermektedir.
+            </div>
+            <div class="continue button">Bindik bir alamete...</div>
+        </div>
+    </div>
+    <div id="optionContainer">
+        <div class="fb-like-box"  style="height: 203px; margin: 0 -7px 10px -5px; 
+    overflow: hidden;" data-href="https://www.facebook.com/kelimeesprisi" data-width="232" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false">        </div>
+        <div class="options">
+            <div class="active option-item"><a>Sıralı Göster</a></div>
+            <div class="option-item"><a>Rastgele Göster</a></div>
+            <div class="option-item"><a>Göster ama Verme</a></div>
+        </div>
+    </div>
+    <div id="postContainer"></div>
+    
+    <div id="fb-root"></div>
+    
+    <script>
+        
+        // ### Enabling the welcome message ###
+        
+        $('.continue').click(function() {
+            $('body').removeClass('preview');
+        });
+        
+        
+        // ### Including Facebook library ###
+        
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=167672810065497&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        
+        
+        // ### Printing embedded Facebook posts ###
+        
+        /* Working copy
+        jQuery.get('codes.txt', function(data) {
+            var codes = data.split(',');
+            for ( var i = 0; i < codes.length; i++ ) {
+                $(document).ready(function() {
+                    $('#postContainer').append('<div style="margin-bottom: 20px;" class="fb-post" data-href="https://www.facebook.com/kelimeesprisi/posts/' + codes[i] + '" data-width="540"></div>');
+                });
+            }
+        });
+        */
+        
+        /* Smarter but not-working copy */
+        var count = 0;
+        jQuery.get('codes.txt', function(data) {
+            codes = data.split(',');
+            function update(){
+                $('#postContainer').append('<div style="margin-bottom: 20px;" class="fb-post" data-href="https://www.facebook.com/kelimeesprisi/posts/' + codes[count] + '" data-width="540"></div>');
+                count++;
+                if(count < codes.length) {
+                    setTimeout(update, 500);
+                }
+            }
+            update();
+        });
+    </script>
+    <script src="scripts/less.js" type="text/javascript"></script>
+</body>
+</html>
