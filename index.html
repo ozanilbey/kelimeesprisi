@@ -19,6 +19,7 @@
     <title>Kelime Esprisi</title>
     
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="scripts/parser.js" type="text/javascript"></script>
     
     <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssreset/cssreset-min.css">
     <link type="text/less" rel="stylesheet" href="styles/style.less">
@@ -46,27 +47,30 @@
     </div>
     <div id="optionContainer">
         <div class="fb-like-box"  style="height: 203px; margin: 0 -7px 10px -5px; 
-    overflow: hidden;" data-href="https://www.facebook.com/kelimeesprisi" data-width="232" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false">        </div>
+    overflow: hidden;" data-href="https://www.facebook.com/kelimeesprisi" data-width="232" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
         <div class="options">
-            <div class="active option-item"><a>Sıralı Göster</a></div>
-            <div class="option-item"><a>Rastgele Göster</a></div>
-            <div class="option-item"><a>Göster ama Verme</a></div>
+            <div id="button-all" class="active option-item"><a>Tüm Espriler</a></div>
+            <div id="button-picture" class="option-item"><a>Resim İçerikliler</a></div>
+            <div id="button-text" class="option-item"><a>Metin İçerikliler</a></div>
         </div>
     </div>
-    <div id="postContainer"></div>
+    <div id="postContainer">
+        <div class="text note">
+            Bu bölümdeki resimlerin ölçüleri Facebook kapak resmi yapmak için uygundur.
+        </div>
+    </div>
     
     <div id="fb-root"></div>
     
     <script>
         
-        // ### Enabling the welcome message ###
+        // Enabling the welcome message
         
         $('.continue').click(function() {
             $('body').removeClass('preview');
         });
         
-        
-        // ### Including Facebook library ###
+        // Including Facebook library
         
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -75,34 +79,7 @@
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=167672810065497&version=v2.0";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-        
-        
-        // ### Printing embedded Facebook posts ###
-        
-        /* Working copy
-        jQuery.get('codes.txt', function(data) {
-            var codes = data.split(',');
-            for ( var i = 0; i < codes.length; i++ ) {
-                $(document).ready(function() {
-                    $('#postContainer').append('<div style="margin-bottom: 20px;" class="fb-post" data-href="https://www.facebook.com/kelimeesprisi/posts/' + codes[i] + '" data-width="540"></div>');
-                });
-            }
-        });
-        */
-        
-        /* Smarter but not-working copy */
-        var count = 0;
-        jQuery.get('codes.txt', function(data) {
-            codes = data.split(',');
-            function update(){
-                $('#postContainer').append('<div style="margin-bottom: 20px;" class="fb-post" data-href="https://www.facebook.com/kelimeesprisi/posts/' + codes[count] + '" data-width="540"></div>');
-                count++;
-                if(count < codes.length) {
-                    setTimeout(update, 500);
-                }
-            }
-            update();
-        });
+
     </script>
     <script src="scripts/less.js" type="text/javascript"></script>
 </body>

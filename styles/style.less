@@ -1,3 +1,27 @@
+/* ### VARIABLES ### */
+
+@blue: #3fa9e6;
+@green: #00ff6c;
+@postWidth: 540px;
+@postPadding: 10px;
+@textPostWidth: 540px;
+
+@textPostPresetWidth: 851px;
+@textPostPresetHeight: 370px;
+
+/* ### CALCULATIONS ### */
+
+@optionContainerWidth: 220px;
+@sectionDividerWidth: 20px;
+@postContainerWidth: @postWidth;
+@totalContentWidth: @optionContainerWidth + @sectionDividerWidth + @postContainerWidth;
+@optionContainerPullValue: -1 * @totalContentWidth / 2;
+@postContainerPullValue: (@totalContentWidth / 2) - @postContainerWidth;
+
+
+
+@textPostHeight: floor((@textPostWidth - (2 * @postPadding)) * @textPostPresetHeight / @textPostPresetWidth - 1px);
+
 /* ### DEFAULTS ### */
 
 div {
@@ -56,12 +80,6 @@ src:url("../fonts/helveticaneue45light.eot?#iefix") format("eot"),
     url("../fonts/helveticaneue45light.svg#helveticaneue45light") format("svg");
 }
 
-/* ### VARIABLES ### */
-
-@blue: #3fa9e6;
-@green: #00ff6c;
-
-
 /* ### SHORT VERSIONS ### */
 
 .fleft {
@@ -110,6 +128,10 @@ src:url("../fonts/helveticaneue45light.eot?#iefix") format("eot"),
 }
 
 .shadow {
+    .box-shadow(2px 4px 4px -4px rgba(0,0,0,.15));
+}
+
+.bottom-shadow {
     .box-shadow(0 4px 4px -4px rgba(0,0,0,.25));
 }
 
@@ -129,17 +151,6 @@ src:url("../fonts/helveticaneue45light.eot?#iefix") format("eot"),
     @padding: ((@boxheight - @lineheight)/2);
     padding: (@padding - ceil(@addition / 4)) (@padding * 1.25) (@padding + ceil(@addition / 4)) (@padding * 1.25);
 }
-
-/* ### CALCULATIONS ### */
-
-@optionContainerWidth: 220px;
-@sectionDividerWidth: 20px;
-@postContainerWidth: 540px;
-@totalContentWidth: @optionContainerWidth + @sectionDividerWidth + @postContainerWidth;
-@optionContainerPullValue: -1 * @totalContentWidth / 2;
-@postContainerPullValue: (@totalContentWidth / 2) - @postContainerWidth;
-
-
 
 
 /*### ITEMS ###*/
@@ -225,6 +236,7 @@ html {
 
 body {
     height: 100%;
+    color: #999;
     font-family: "HelveticaNeueW02-45Ligh", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
 }
 
@@ -271,7 +283,7 @@ input:focus, textarea:focus, select:focus {
 /* ### LAYOUT ### */
 
 #brandContainer {
-    .shadow;
+    .bottom-shadow;
     display: table;
     position: fixed;
     top: 0px;
@@ -303,7 +315,7 @@ input:focus, textarea:focus, select:focus {
     right: 0px;
     height: 0px;
     z-index: 9999;
-    margin-top: -1px;
+    margin-top: -2px; // Small fix
     background: @blue;
     color: white;
     font-size: 24px;
@@ -345,6 +357,7 @@ input:focus, textarea:focus, select:focus {
                 background-color: rgba(255, 255, 255, .35);
             }
             &.active {
+                .shadow;
                 .round(3px);
                 border-color: #e5e6e9 #dfe0e4 #d0d1d5;
                 background-color: white;
@@ -354,7 +367,7 @@ input:focus, textarea:focus, select:focus {
             }
             a {
                 .font-metrics(19px, 50px);
-                color: #777;
+                color: #666;
                 text-align: left;
                 display: block;
                 box-sizing: border-box;
@@ -387,6 +400,49 @@ input:focus, textarea:focus, select:focus {
     position: absolute;
     display: inline-block;
     transition: all 1s ease;
+    .post {
+        .shadow;
+        .round(3px);
+        background: white;
+        width: @postWidth;
+        padding: @postPadding;
+        padding-bottom: 0px;
+        height: auto;
+        margin-bottom: 20px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+        &.text {
+            .wrapper {
+                height: @textPostHeight;
+                overflow: hidden;
+            }
+        }
+        .credits {
+            .font-metrics(15px, 40px);
+            padding-left: 5px;
+            top: -1px;
+            position: relative;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    .note {
+        .font-metrics(13px,48px);
+        height: 50px;
+        color: #666;
+        text-align: center;
+        display: none;
+        margin-bottom: 20px;
+        border: 1px dashed #eee;
+        background-color: #ffffd9;
+    }
+    .endnote {
+        line-height: 25px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
 }
 
 
@@ -414,7 +470,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .continue {
-    .shadow;
+    .bottom-shadow;
     .font-metrics(22px, 60px);
     height: 66px;
     display: table-cell;
@@ -427,9 +483,6 @@ input:focus, textarea:focus, select:focus {
     color: @blue;
     border: 3px solid white;
     background-color: rgba(255, 255, 255, .75);
-    background-image: url(../../images/icons/instagram-icon_small.png);
-    background-repeat: no-repeat;
-    background-position: 12px 12px;
     &:hover {
         background-color: rgba(255, 255, 255, 1);
     }
