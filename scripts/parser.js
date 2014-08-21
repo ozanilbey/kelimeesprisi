@@ -37,10 +37,10 @@ $(document).ready(function() {
         for(i = 0; i < keys.length; i++) {
             postID = keys[i];
             postData = data[postID];
-            $('#postContainer').append('<div class="' + postData['type'] + ' post"><a href="https://www.facebook.com/photo.php?fbid=' + postID + '"><div class="wrapper"><img src="posts/' + postID + '.png" /></div></a><div class="credits"><b>Gönderen:</b> <a href="https://www.facebook.com/' + postData['source']['facebook_id'] + '">' + postData['source']['fullname'] + '</a></div></div>');
+            $('#postContainer').append('<div class="' + postData['type'] + ' post"><a href="https://www.facebook.com/photo.php?fbid=' + postID + '" target="_blank"><div class="wrapper"><img src="posts/' + postID + '.png" /></div></a><div class="credits"><b>Gönderen:</b> <a href="https://www.facebook.com/' + postData['source']['facebook_id'] + '" target="_blank">' + postData['source']['fullname'] + '</a></div></div>');
         }
         
-        $('#postContainer').append('<p class="endnote">Her Hakkı erkektir ve erkek adam saklanmaz!<br><a class="bold" href="http://twitter.com/fasoadmn">fa$o admin</a> &amp; <a class="bold" href="http://twitter.com/yanciadmn">yancı admin</a></p>');
+        $('#postContainer').append('<p class="endnote">Her Hakkı erkektir ve erkek adam saklanmaz!<br><a class="bold" href="http://twitter.com/fasoadmn" target="_blank">fa$o admin</a> &amp; <a class="bold" href="http://twitter.com/yanciadmn" target="_blank">yancı admin</a></p>');
     });
 
 });
